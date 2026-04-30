@@ -1,0 +1,6 @@
+{
+    "hola": "¡Hola! ¿En qué puedo ayudarte hoy?",
+    "docker": "Docker es una plataforma para automatizar el despliegue de aplicaciones en contenedores.",
+    "flask": "Flask es un micro-framework de Python muy ligero para crear aplicaciones web.",
+    "adios": "¡Hasta pronto! Que tengas un buen día."
+}
