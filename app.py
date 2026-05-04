@@ -1,26 +1,31 @@
 from flask import Flask, request, jsonify
 import json
-import os
 
 app = Flask(__name__)
 
-# Función para cargar respuestas desde el JSON
-def cargar_respuestas():
-    with open('datos.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+def cargar_base_datos():
+    try:
+        with open("datos.json", "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {"preguntas": []}
 
 @app.route('/chat', methods=['GET'])
 def chat():
-    # Obtenemos la pregunta de la URL, ej: /chat?pregunta=hola
-    pregunta = request.args.get('pregunta', '').lower()
-    respuestas = cargar_respuestas()
+    pregunta_usuario = request.args.get('pregunta', '').lower()
+    base_datos = cargar_base_datos()
     
-    # Buscamos la respuesta o damos una por defecto
-    respuesta = respuestas.get(pregunta, "Lo siento, no entiendo esa pregunta.")
+    palabras_pregunta = set(pregunta_usuario.split())
     
-    return jsonify({"respuesta": respuesta})
+    # Lógica del profesor: buscar coincidencia de palabras clave
+    for item in base_datos['preguntas']:
+        palabras_clave = set(item['pregunta'].lower().split())
+        if palabras_clave.intersection(palabras_pregunta):
+            respuesta = item['respuesta']
+            url = item.get('url', 'No disponible')
+            return jsonify({"respuesta": f"{respuesta} Más información: {url}"})
+    
+    return jsonify({"respuesta": "Lo siento, no tengo una respuesta para esa pregunta."})
 
 if __name__ == '__main__':
-    # Ejecutamos en el puerto 5000 y accesible desde cualquier IP (0.0.0.0)
-    # Esto es vital para que Docker funcione luego
     app.run(host='0.0.0.0', port=5000)

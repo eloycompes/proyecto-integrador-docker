@@ -1,7 +1,19 @@
 {
-    "hola": "¡Hola! ¿En qué puedo ayudarte hoy?",
-    "docker": "Docker es una plataforma para automatizar el despliegue de aplicaciones en contenedores.",
-    "flask": "Flask es un micro-framework de Python muy ligero para crear aplicaciones web.",
-    "adios": "¡Hasta pronto! Que tengas un buen día.",
-    "volumen": "Persistencia de datos en funcionamiento."
+  "preguntas": [
+    {
+      "pregunta": "docker build",
+      "respuesta": "El comando `docker build` se usa para construir una imagen Docker a partir de un Dockerfile.",
+      "url": "https://docs.docker.com/engine/reference/commandline/build/"
+    },
+    {
+      "pregunta": "docker run",
+      "respuesta": "El comando `docker run` crea y ejecuta un contenedor basado en una imagen. Ejemplo: `docker run -p 8080:80 nginx`.",
+      "url": "https://docs.docker.com/engine/reference/run/"
+    },
+    {
+      "pregunta": "volumen",
+      "respuesta": "Los volúmenes son el mecanismo preferido para persistir datos generados y utilizados por contenedores Docker.",
+      "url": "https://docs.docker.com/storage/volumes/"
+    }
+  ]
 }
